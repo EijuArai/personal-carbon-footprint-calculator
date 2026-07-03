@@ -1,0 +1,30 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(84, 157, 88, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(47, 143, 131, 0.14), transparent 24%),
+    #eef6ef;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+code,
+pre,
+[data-mono="true"] {
+  font-family: "IBM Plex Mono", monospace;
+}
