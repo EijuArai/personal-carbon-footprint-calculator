@@ -21,7 +21,7 @@ import {
   type ProtocolConfigSnapshot,
 } from '../../src/modules/oracle/index.js';
 
-const programId = new PublicKey('68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi');
+const programId = new PublicKey('CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve');
 const user = new PublicKey('4Nd1mYqV8C4QyXcXwjkA8azhbugzuDUFcPRwvx6pRPxE');
 const admin = new PublicKey('11111111111111111111111111111115');
 const verifier = new PublicKey('11111111111111111111111111111112');

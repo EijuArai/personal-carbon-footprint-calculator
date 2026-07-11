@@ -29,7 +29,7 @@ describe("loadFrontendRuntimeConfig", () => {
       mode: "local-e2e",
       backendBaseUrl: "http://127.0.0.1:3000",
       solanaRpcUrl: "http://127.0.0.1:8899",
-      programId: "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+      programId: "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
       localE2E: {
         userSecretKeyJson: "[1,2,3]",
         mintAuthoritySecretKeyJson: "[4,5,6]",
@@ -57,7 +57,7 @@ describe("createFrontendRuntimeAdapters", () => {
         mode: "local-e2e",
         backendBaseUrl: "http://127.0.0.1:3000",
         solanaRpcUrl: "http://127.0.0.1:8899",
-        programId: "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+        programId: "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
         localE2E: {
           userSecretKeyJson: JSON.stringify(
             Array.from({ length: 64 }, (_, index) => index + 1),
@@ -87,7 +87,7 @@ describe("createFrontendRuntimeAdapters", () => {
         mode: "local-e2e",
         backendBaseUrl: "http://127.0.0.1:3000",
         solanaRpcUrl: "http://127.0.0.1:8899",
-        programId: "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+        programId: "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
         localE2E: {
           userSecretKeyJson: JSON.stringify(
             Array.from({ length: 64 }, (_, index) => index + 1),
@@ -233,7 +233,7 @@ describe("createFetchEncryptedIngestionApi", () => {
 describe("createLocalE2EWalletProfileAdapter", () => {
   it("keeps emission history in the frontend userProfile IDL before publicProfile", () => {
     const idl = buildFrontendIdl(
-      "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+      "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
     ) as {
       types?: Array<{
         name: string;
@@ -274,7 +274,7 @@ describe("createLocalE2EWalletProfileAdapter", () => {
     const adapter = createLocalE2EWalletProfileAdapter(
       {
         rpcUrl: "http://127.0.0.1:8899",
-        programId: "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+        programId: "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
         userSecretKeyJson: JSON.stringify(Array.from(userSigner.secretKey)),
         mintAuthoritySecretKeyJson: JSON.stringify(
           Array.from(mintAuthoritySigner.secretKey),

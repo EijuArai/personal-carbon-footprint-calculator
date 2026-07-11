@@ -112,11 +112,12 @@ anchor deploy
 
 Program ID:
 
-- `68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi`
+- `CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve`
 
 > #### CAUTION
 >
 > Since the Solana program ID is updated with each build, any code that depends on the Solana program ID also needs to be updated.
+> Update the program ID using the `anchor keys sync` command, and then replace the above program ID with the updated program ID using the IDE's replace function.
 
 ### Backend
 
@@ -155,7 +156,7 @@ npm run build
 npm run quality
 ```
 
-Frontend startup now expects `VITE_FRONTEND_RUNTIME_MODE=local-e2e` plus the
+Frontend startup expects `VITE_FRONTEND_RUNTIME_MODE=local-e2e` plus the
 generated local signer inputs written by `scripts/local-e2e/up.sh`.
 
 For a working browser session, prefer the managed local E2E workflow instead of
@@ -198,10 +199,6 @@ Generated local state lives under `.local-e2e/`, including:
 - `.local-e2e/backend/green-reputation.sqlite`
 
 ## Seed Mock Data
-
-> #### Note
->
-> If you are seeding with mock data for testing, set `isDailySubmissionLocked` to False in frontend/src/features/submission/encrypted-submission-panel.tsx.
 
 To calculate rewards, at least 30 days of input data are required.
 The following shell script inputs simulated daily CO2 emission data into Solana's on-chain.

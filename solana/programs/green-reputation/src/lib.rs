@@ -6,7 +6,7 @@ use anchor_spl::{
     token_2022_extensions::non_transferable,
 };
 
-declare_id!("68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi");
+declare_id!("CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve");
 
 pub mod constants;
 pub mod errors;

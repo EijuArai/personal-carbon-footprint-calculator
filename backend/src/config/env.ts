@@ -36,7 +36,7 @@ const envSchema = z
     GREEN_REPUTATION_PROGRAM_ID: z
       .string()
       .min(1)
-      .default('68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi'),
+      .default('CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve'),
     METADATA_BASE_URI: z
       .url()
       .default('https://metadata.green-reputation.local'),

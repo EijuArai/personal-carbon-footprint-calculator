@@ -33,7 +33,7 @@ const solanaDir = path.resolve(rootDir, "solana");
 const rpcUrl = process.env.PLAYWRIGHT_SOLANA_RPC_URL ?? "http://127.0.0.1:8899";
 const programId = new PublicKey(
   process.env.GREEN_REPUTATION_PROGRAM_ID ??
-    "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+    "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
 );
 
 const idl = JSON.parse(

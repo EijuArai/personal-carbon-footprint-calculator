@@ -15,7 +15,7 @@ import type {
   UserProfileSnapshot,
 } from '../../src/modules/oracle/index.js';
 
-const programId = new PublicKey('68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi');
+const programId = new PublicKey('CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve');
 const protocolConfig: ProtocolConfigSnapshot = {
   admin: new PublicKey('11111111111111111111111111111115'),
   verifier: new PublicKey('11111111111111111111111111111112'),

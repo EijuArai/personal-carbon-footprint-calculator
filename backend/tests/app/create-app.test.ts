@@ -218,7 +218,7 @@ describe('createApp', () => {
           return null;
         },
       },
-      programId: new PublicKey('68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi'),
+      programId: new PublicKey('CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve'),
       now: () => 1_710_385_200_000,
     });
     const app = createApp({

@@ -13,7 +13,7 @@ const REWARD_TREASURY_VAULT_SEED = Buffer.from("reward-treasury-vault");
 const rpcUrl = process.env.SOLANA_RPC_URL ?? "http://127.0.0.1:8899";
 const programId = new PublicKey(
   process.env.GREEN_REPUTATION_PROGRAM_ID ??
-    "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi",
+    "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve",
 );
 const admin = loadKeypairFromFile(requiredEnv("LOCAL_E2E_ADMIN_KEYPAIR_PATH"));
 const verifier = loadKeypairFromFile(

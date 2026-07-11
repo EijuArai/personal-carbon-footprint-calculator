@@ -7,7 +7,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-green_reputation = "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi"
+green_reputation = "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve"
 
 [registry]
 url = "https://api.apr.dev"

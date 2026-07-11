@@ -15,7 +15,7 @@ export interface FrontendRuntimeConfig {
 
 const DEFAULT_BACKEND_BASE_URL = "http://127.0.0.1:3000";
 const DEFAULT_LOCAL_SOLANA_RPC_URL = "http://127.0.0.1:8899";
-const DEFAULT_PROGRAM_ID = "68EBpJsPtNkbgvF3PhNFQbtnxYvSoBCCN6QoMYGJ8xzi";
+const DEFAULT_PROGRAM_ID = "CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve";
 
 export function loadFrontendRuntimeConfig(
   env: ImportMetaEnv = import.meta.env,
