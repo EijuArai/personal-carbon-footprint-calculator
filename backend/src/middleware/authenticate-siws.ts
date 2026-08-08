@@ -18,6 +18,7 @@ export interface AuthenticateSiwsDependencies {
 declare module 'express-serve-static-core' {
   interface Locals {
     authContext?: AuthContext;
+    requestId?: string;
   }
 }
 
@@ -38,13 +39,31 @@ export function authenticateSiws(dependencies: AuthenticateSiwsDependencies) {
       });
 
       response.locals.authContext = authContext;
+      logger.info(
+        {
+          requestId: response.locals.requestId,
+          method: request.method,
+          path: request.originalUrl,
+          subject: authContext.subject,
+          nonce: authContext.nonce,
+        },
+        'SIWS authentication succeeded.',
+      );
       next();
     } catch (error) {
       if (
         error instanceof Error &&
         /UNIQUE constraint failed: used_nonces\.nonce/.test(error.message)
       ) {
-        logger.error({ err: error }, 'JWT nonce has already been used.');
+        logger.error(
+          {
+            err: error,
+            requestId: response.locals.requestId,
+            method: request.method,
+            path: request.originalUrl,
+          },
+          'JWT nonce has already been used.',
+        );
         next(
           new AppError(
             'replayed_nonce',

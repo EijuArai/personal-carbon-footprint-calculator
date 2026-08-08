@@ -28,6 +28,7 @@ import {
   GreenReputationOracleClient,
   type ProgramTransport,
 } from '../modules/oracle/index.js';
+import logger from '../utils/logger.js';
 
 export interface RuntimeSigners {
   verifier: Keypair;
@@ -128,6 +129,17 @@ export function createConfiguredBackendRuntime(
     footprintOrchestrationService,
     publicKeyProvider: () => decryptionService.exportPublicKeyPem(),
   });
+
+  logger.info(
+    {
+      environment: appEnv.NODE_ENV,
+      sqlitePath: appEnv.SQLITE_PATH,
+      solanaRpcUrl: appEnv.SOLANA_RPC_URL,
+      localE2eMode: appEnv.LOCAL_E2E_MODE,
+      walletAuthEnabled: Boolean(walletAuthService),
+    },
+    'Configured backend runtime resources.',
+  );
 
   return {
     app,

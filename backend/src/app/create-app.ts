@@ -12,6 +12,7 @@ import { encryptedRequestSchema } from '../modules/ingestion/encrypted-request.j
 import type { WalletAuthService } from '../modules/ingestion/wallet-auth-service.js';
 import type { FootprintOrchestrationService } from '../modules/ingestion/footprint-orchestration.js';
 import type { StateStore } from '../modules/storage/state-store.js';
+import logger from '../utils/logger.js';
 
 export interface AppDependencies {
   env: AppEnv;
@@ -66,6 +67,38 @@ export function createApp(dependencies: AppDependencies): Express {
       credentials: true,
     }),
   );
+  app.use((request, response, next) => {
+    const startedAt = Date.now();
+    const requestId = requestIdProvider();
+
+    response.locals.requestId = requestId;
+    response.setHeader('x-request-id', requestId);
+
+    logger.info(
+      {
+        requestId,
+        method: request.method,
+        path: request.originalUrl,
+        ip: request.ip,
+      },
+      'HTTP request started.',
+    );
+
+    response.on('finish', () => {
+      logger.info(
+        {
+          requestId,
+          method: request.method,
+          path: request.originalUrl,
+          statusCode: response.statusCode,
+          durationMs: Date.now() - startedAt,
+        },
+        'HTTP request completed.',
+      );
+    });
+
+    next();
+  });
 
   const ingestEncryptedPayload = async (
     request: express.Request,
@@ -91,7 +124,7 @@ export function createApp(dependencies: AppDependencies): Express {
       }
 
       const decrypted = decryptionService.decryptRequest(parsed.data);
-      const requestId = requestIdProvider();
+      const requestId = response.locals.requestId ?? requestIdProvider();
       const result =
         await dependencies.footprintOrchestrationService.ingestDecryptedPayload(
           decrypted,
@@ -241,7 +274,7 @@ export function createApp(dependencies: AppDependencies): Express {
   app.use(
     (
       error: unknown,
-      _request: express.Request,
+      request: express.Request,
       response: express.Response,
       _next: express.NextFunction,
     ) => {
@@ -250,6 +283,18 @@ export function createApp(dependencies: AppDependencies): Express {
       const message = isAppError(error)
         ? error.message
         : 'Internal Server Error';
+
+      logger.error(
+        {
+          err: error,
+          requestId: response.locals.requestId,
+          method: request.method,
+          path: request.originalUrl,
+          statusCode,
+          code,
+        },
+        'HTTP request failed.',
+      );
 
       response.status(statusCode).json({
         error: {
@@ -261,4 +306,10 @@ export function createApp(dependencies: AppDependencies): Express {
   );
 
   return app;
+}
+
+declare module 'express-serve-static-core' {
+  interface Locals {
+    requestId?: string;
+  }
 }

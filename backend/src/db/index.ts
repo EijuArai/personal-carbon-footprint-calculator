@@ -221,6 +221,11 @@ export function createDatabaseHandle(
   applyPragmas(connection);
   migrate(connection);
 
+  logger.info(
+    { filename: options.filename ?? ':memory:' },
+    'SQLite database handle initialized.',
+  );
+
   return { kind: 'sqlite', connection };
 }
 

@@ -14,6 +14,7 @@ import {
   type ConfiguredBackendRuntime,
   type CreateConfiguredBackendRuntimeOptions,
 } from './create-runtime.js';
+import logger from '../utils/logger.js';
 
 export interface OracleWorkerLoopDependencies {
   pollIntervalMs: number;
@@ -186,6 +187,18 @@ export function createConfiguredWorkerRuntime(
     ...(options.onError ? { onError: options.onError } : {}),
   });
 
+  logger.info(
+    {
+      pollIntervalMs:
+        options.pollIntervalMs ?? appEnv.LOCAL_E2E_WORKER_POLL_INTERVAL_MS,
+      maxJobsPerTick:
+        options.maxJobsPerTick ?? appEnv.LOCAL_E2E_WORKER_MAX_JOBS_PER_TICK,
+      hasMetadataAuthority: Boolean(signers.metadataAuthority),
+      hasAdminSigner: Boolean(signers.admin),
+    },
+    'Configured worker runtime resources.',
+  );
+
   return {
     resources: {
       backendRuntime,
@@ -199,12 +212,15 @@ export function createConfiguredWorkerRuntime(
       return await workerLoop.runDueJobsOnce(maxJobs);
     },
     startWorkerLoop() {
+      logger.info('Starting oracle worker loop.');
       workerLoop.start();
     },
     stopWorkerLoop() {
+      logger.info('Stopping oracle worker loop.');
       workerLoop.stop();
     },
     dispose() {
+      logger.info('Disposing worker runtime resources.');
       workerLoop.stop();
       backendRuntime.resources.databaseHandle.connection.close();
     },

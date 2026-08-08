@@ -165,15 +165,28 @@ export class OracleRetryRunner {
 
     try {
       const execution = await this.#dispatchJob(claimed);
-      return this.#stateStore.completeOracleJob({
+      const completedJob = this.#stateStore.completeOracleJob({
         jobId: claimed.id,
         lockKey: claimed.lockKey,
         finishedAtMs: this.#now(),
         transactionSignature: execution.signature,
       });
+
+      logger.info(
+        {
+          jobId: claimed.id,
+          jobKind: claimed.kind,
+          attemptNumber,
+          workerId: this.#workerId,
+          transactionSignature: execution.signature,
+        },
+        'Oracle job completed successfully.',
+      );
+
+      return completedJob;
     } catch (error) {
       const details = classifyJobError(error);
-      return this.#stateStore.failOracleJob({
+      const failedJob = this.#stateStore.failOracleJob({
         jobId: claimed.id,
         lockKey: claimed.lockKey,
         finishedAtMs: this.#now(),
@@ -187,6 +200,21 @@ export class OracleRetryRunner {
         errorMessage: details.message,
         retryable: details.retryable,
       });
+
+      logger.error(
+        {
+          err: error,
+          jobId: claimed.id,
+          jobKind: claimed.kind,
+          attemptNumber,
+          workerId: this.#workerId,
+          retryable: details.retryable,
+          errorCode: details.code,
+        },
+        'Oracle job execution failed.',
+      );
+
+      return failedJob;
     }
   }
 
