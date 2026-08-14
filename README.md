@@ -101,24 +101,6 @@ cd solana
 anchor test
 ```
 
-For manual localnet work:
-
-```bash
-solana-test-validator --reset
-cd solana
-anchor build
-anchor deploy
-```
-
-Program ID:
-
-- `CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve`
-
-> #### CAUTION
->
-> Since the Solana program ID is updated with each build, any code that depends on the Solana program ID also needs to be updated.
-> Update the program ID using the `anchor keys sync` command, and then replace the above program ID with the updated program ID using the IDE's replace function.
-
 ### Backend
 
 From `backend/`:
@@ -172,6 +154,25 @@ bash scripts/local-e2e/status.sh
 bash scripts/local-e2e/down.sh
 ```
 
+> #### CAUTION
+>
+> All hardcoded program IDs in the current project are placeholders. To execute the local E2E workflow, replace all program IDs using the following steps.
+>
+> 1. Update Solana deploy key
+>
+> ```bash
+> cd solana
+> anchor keys sync
+> ```
+>
+> 2. Replace all placeholders with new program ID.
+>    Open `solana/Anchor.toml` and copy the program ID for the `green_reputation` field. Next, use your IDE's replace feature to replace all placeholders (`CYTYoWKNxj4xP1vUPef2HuRb8x8kgrnzpQXMi665Q6ve`) with that program ID.
+> 3. Build Solana program
+>
+> ```bash
+> anchor build
+> ```
+
 `up.sh` performs the full local bootstrap:
 
 1. resets the local validator
@@ -206,6 +207,12 @@ This shell script uses data from the National Institute for Environmental Studie
 
 ```bash
 bash scripts/local-e2e/seed-emission-history.sh
+```
+
+To measure E2E performance run the following shell.
+
+```bash
+bash scripts/local-e2e/measure-submit-turnaround.sh
 ```
 
 ## Current Architecture Summary
