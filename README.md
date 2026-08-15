@@ -111,7 +111,7 @@ npm test
 npm run dev
 ```
 
-> #### Important note
+> #### NOTE
 >
 > the configured backend runtime requires Solana signer material.
 > For a clean local boot you should usually use the managed local E2E workflow,
@@ -154,7 +154,7 @@ bash scripts/local-e2e/status.sh
 bash scripts/local-e2e/down.sh
 ```
 
-> #### CAUTION
+> #### NOTE
 >
 > All hardcoded program IDs in the current project are placeholders. To execute the local E2E workflow, replace all program IDs using the following steps.
 >
